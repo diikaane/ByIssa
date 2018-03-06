@@ -1,0 +1,6 @@
+RewriteEngine On  
+RewriteRule ^(.+){0}$ view/index.php
+RewriteRule ^login$ view/index.php?p=login
+RewriteRule ^connect$ view/index.php?p=connect
+RewriteRule ^deconnection$ view/index.php?p=deconnection
+RewriteRule groupe/([0-9]+) View/index.php?p=groupe&id=$1
