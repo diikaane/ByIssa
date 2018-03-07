@@ -1,5 +1,5 @@
 <?php
-
+//This is for Connection whith my DataBase 
 	return array(
 
 		'db_name' => 'providence',
