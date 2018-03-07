@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,132 +18,79 @@ require_once dirname(dirname(__DIR__)).'/entities/Administrateur.php';
  *
  * @author dii
  */
-class IAdministrateurImpl extends Controller implements IAdministrateur,  IService{ 
-    
+class IAdministrateurImpl extends Controller implements IAdministrateur,  IService{
+    private $id;
+    private $profile;
+    private $user ;
     public function Ajouter($Employe) {
-        $db = new DB() ; 
+        $db = new DB() ;
         $insert = new Insert();
-        if(is_a($Employe, 'Comptable')) {
-            $sql = $insert->from('comptable')
+
+            $sql = $insert->from('employe')
                     ->select('nom','prenom','telephone','login','password','email')
-                    ->select('adresse','compteBank','idAdministrateur','matricule')
+                    ->select('adresse','compteBank','idAdministrateur','matricule','type')
                     ->param(':nom',':prenom',':telephone',':login',':password',':email')
-                    ->param(':adresse',':compteBank',':idAdministrateur',':matricule');
-            
+                    ->param(':adresse',':compteBank',':idAdministrateur',':matricule',':type');
+
             $params = [
-                'nom' =>$Employe->getNom(),
-                'prenom'=>$Employe->getPrenom(),
-                'telephone'=>$Employe->getTelephone(),
-                'login'=>$Employe->getLogin(),
-                'password'=>$Employe->getPassword(),
-                'email'=>$Employe->getEmail(),
-                'adresse'=>$Employe->getAdresse(),
-                'compteBank'=>$Employe->getCompteBank(),
-                'idAdministrateur'=>$Employe->getAdministrateur(),
-                'matricule'=>$Employe->getMatricule()
+                'nom' =>$Employe['nom'],
+                'prenom'=>$Employe['prenom'],
+                'telephone'=>$Employe['telephone'],
+                'login'=>$Employe['login'],
+                'password'=>$Employe['password'],
+                'email'=>$Employe['email'],
+                'adresse'=>$Employe['adresse'],
+                'compteBank'=>$Employe['compteBank'],
+                'idAdministrateur'=>$Employe['idAdministrateur'],
+                'matricule'=>$Employe['matricule'],
+                'type'=>$Employe['type']
             ];
              $db->query($sql, $params, $class_name=null);
-             return true;
-        }elseif(is_a($Employe, 'Directeur')) {
-            $sql = $insert->from('directeur')
-                    ->select('nom','prenom','telephone','login','password','email')
-                    ->select('adresse','compteBank','idAdministrateur','matricule')
-                    ->param(':nom',':prenom',':telephone',':login',':password',':email')
-                    ->param(':adresse',':compteBank',':idAdministrateur',':matricule');
-            
-            $params = [
-                'nom' =>$Employe->getNom(),
-                'prenom'=>$Employe->getPrenom(),
-                'telephone'=>$Employe->getTelephone(),
-                'login'=>$Employe->getLogin(),
-                'password'=>$Employe->getPassword(),
-                'email'=>$Employe->getEmail(),
-                'adresse'=>$Employe->getAdresse(),
-                'compteBank'=>$Employe->getCompteBank(),
-                'idAdministrateur'=>$Employe->getAdministrateur(),
-                'matricule'=>$Employe->getMatricule()
-            ];
-             $db->query($sql, $params, $class_name=null);
-            return true;
-        }elseif(is_a($Employe, 'Juriste')) {
-            $sql = $insert->from('juriste')
-                    ->select('nom','prenom','telephone','login','password','email')
-                    ->select('adresse','compteBank','idAdministrateur','matricule')
-                    ->param(':nom',':prenom',':telephone',':login',':password',':email')
-                    ->param(':adresse',':compteBank',':idAdministrateur',':matricule');
-            
-            $params = [
-                'nom' =>$Employe->getNom(),
-                'prenom'=>$Employe->getPrenom(),
-                'telephone'=>$Employe->getTelephone(),
-                'login'=>$Employe->getLogin(),
-                'password'=>$Employe->getPassword(),
-                'email'=>$Employe->getEmail(),
-                'adresse'=>$Employe->getAdresse(),
-                'compteBank'=>$Employe->getCompteBank(),
-                'idAdministrateur'=>$Employe->getAdministrateur(),
-                'matricule'=>$Employe->getMatricule()
-            ];
-             $db->query($sql, $params, $class_name=null);
-            return true;
-        }
-        return false;
+        return true;
     }
 
     public function Lister() {
         $db = new DB();
         $select = new Select();
-        $sql = $select->from('comptable');
-       return $db->query($sql, $params=null, 'Comptable');
-        
+        $sql = $select->from('employe');
+       return $db->query($sql, $params=null, 'Employe');
+
     }
 
     public function Update($Employe) {
-        $db = new DB() ; 
+      $Employe = new Employe();
+        $db = new DB() ;
         $update = new Update();
-        if(is_a($Employe, 'Comptable')) {
-            $sql= $update->from('comptable')
-                    ->select('nom','prenom')
+
+            $sql= $update->from('Employe')
                     ->set('nom', ':nom')
+                    ->set('telephone', ':telephone')
+                    ->set('login', ':login')
+                    ->set('password', ':password')
+                    ->set('email', ':email')
+                    ->set('adresse', ':adresse')
+                    ->set('compteBank', ':compteBank')
+                    ->set('idAdministrateur', ':idAdministrateur')
+                    ->set('matricule', ':matricule')
+                    ->set('type', ':type')
                     ->set('prenom', ':prenom')
                     ->where('id = :id') ;
             $params = [
-                'nom' =>'papa',
-                'prenom'=>'laye',
-                'id'=>2
+              'nom' =>$Employe['nom'],
+              'prenom'=>$Employe['prenom'],
+              'telephone'=>$Employe['telephone'],
+              'login'=>$Employe['login'],
+              'password'=>$Employe['password'],
+              'email'=>$Employe['email'],
+              'adresse'=>$Employe['adresse'],
+              'compteBank'=>$Employe['compteBank'],
+              'idAdministrateur'=>$Employe['idAdministrateur'],
+              'matricule'=>$Employe['matricule'],
+              'type'=>$Employe['type']
             ];
-            $db->query($sql, $params);
-             return true;
-        
-        }  elseif(is_a($Employe, 'Directeur')) {
-            $sql= $update->from('directeur')
-                    ->select('nom','prenom')
-                    ->set('nom', ':nom')
-                    ->set('prenom', ':prenom')
-                    ->where('id = :id') ;
-            $params = [
-                'nom' =>'papa',
-                'prenom'=>'laye',
-                'id'=>2
-            ];
-            $db->query($sql, $params);
-             return true;
-        }  elseif(is_a($Employe, 'Juriste')) {
-            $sql= $update->from('juriste')
-                    ->select('nom','prenom')
-                    ->set('nom', ':nom')
-                    ->set('prenom', ':prenom')
-                    ->where('id = :id') ;
-            $params = [
-                'nom' =>'papa',
-                'prenom'=>'laye',
-                'id'=>2
-            ];
-            $db->query($sql, $params);
+             $db->query($sql, $params, $class_name=null);
              return true;
         }
-    }
-    public  static $i = 0 ;
     public function Authentifier($login, $password) {
         $db = new DB();
         $select = new Select();
@@ -156,16 +102,18 @@ class IAdministrateurImpl extends Controller implements IAdministrateur,  IServi
        $datas = $db->query($sql, $params, 'Administrateur');
        if(count($datas)!=0) {
            foreach ($datas as $value) {
-               $id =  $value->getId() ;
-               $user = $value->getPrenom();
+               $this->id =  $value->getId() ;
+               $this->user = $value->getPrenom();
+               $this->profile = $value->getType();
            }
-        return $this->rendre('pages.login',  compact('user','id'));
+           $this->login();
+          //$this->rendre('pages.login',  compact('user','id','profile'));
        }  else {
-           
-            return  $erreur = 'Erreur de Saisie Login ou Mot de Passe incorect';
+              return $erreur = 'Erreur de Saisie Login ou Mot de Passe incorect';
+              $this->home();
        }
-       
-       
+
+
     }
     public function home() {
         $this->rendre('pages.connect');
@@ -173,5 +121,12 @@ class IAdministrateurImpl extends Controller implements IAdministrateur,  IServi
     public function deconnection () {
         $this->rendre('pages.deconnection');
     }
-
+    public function login () {
+      echo "string";
+      $user = $this->user;
+      $id=$this->id;
+      $profile = $this->profile ;
+        $this->rendre('pages.login',compact('user','id','profile'));
+        die();
+    }
 }

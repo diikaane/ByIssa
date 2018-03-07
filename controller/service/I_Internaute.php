@@ -9,7 +9,7 @@ interface I_Internaute {
     /*
      * @return Boolean
      */
-    public function Inscrire();
+    public function Inscrire($Employe);
     /*
      * @return Liste des type de Contrats et Details
      */

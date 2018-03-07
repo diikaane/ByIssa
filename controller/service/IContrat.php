@@ -8,9 +8,9 @@ interface IContrat {
     /*
      * @param Object Contrat
      * @params type de Contrat String
-     * @return Boolean 
+     * @return Boolean
      */
-    public function  Souscrire($contrat,$type);
+    public function  Souscrire($contrat);
     /*
      * @param Object Contrat
      * @return Object Contrat
@@ -25,6 +25,6 @@ interface IContrat {
      * @param int
      * @return Object Contrat
      */
-    public function Details($idContrat) ; 
-    
+    public function Details($idContrat) ;
+
 }

@@ -16,16 +16,30 @@ require_once dirname(dirname(__DIR__)).'/model/Query/Update.php';
  * @author dii
  */
 class IComptableImpl implements IComptable {
-    public function ContratAJour($idEmploye) {
-        return $idEmploye;
+    public function ContratAJour($Employe) {
+      $db = new DB() ;
+      $update = new Update();
+      $update->from('contrat')->set('validerComptable',':validerComptable')->where('id',':id');
+      $params = [
+        'validerComptable'=>1,
+        'id'=>$Employe['id']
+      ];
+      return $db->query($sql, $params, $class_name=null);
     }
 
     public function ContratNonAJour($idEmploye) {
-        return $idEmploye;
+        
     }
 
-    public function VerifNumberBank($idContrat) {
-        return $idContrat ;
+    public function VerifNumberBank($Contrat) {
+      $db = new DB();
+      $select = new Select();
+      $sql = $select->from('client')->where('id',':id')->where('numeroBank != null');
+      $params= [
+        'id'=>$contrat['id']
+
+      ];
+     return $db->query($sql, $params, 'Employe');
     }
 
 }

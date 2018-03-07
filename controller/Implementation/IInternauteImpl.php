@@ -16,12 +16,33 @@ require_once dirname(dirname(__DIR__)).'/model/Query/Update.php';
  * @author dii
  */
 class IInternauteImpl implements I_Internaute {
-    public function Inscrire() {
-        
+    public function Inscrire($Employe) {
+      $db = new DB() ;
+      $insert = new Insert();
+
+          $sql = $insert->from('employe')
+                  ->select('nom','prenom','telephone','login','password','email')
+                  ->select('adresse','compteBank','type')
+                  ->param(':nom',':prenom',':telephone',':login',':password',':email')
+                  ->param(':adresse',':compteBank',':type');
+
+          $params = [
+              'nom' =>$Employe['nom'],
+              'prenom'=>$Employe['prenom'],
+              'telephone'=>$Employe['telephone'],
+              'login'=>$Employe->['login'],
+              'password'=>$Employe['password'],
+              'email'=>$Employe['email'],
+              'adresse'=>$Employe['adresse'],
+              'compteBank'=>$Employe['compteBank'],
+              'type'=>$Employe['type']
+          ];
+           $db->query($sql, $params, $class_name=null);
+      return true;
     }
 
     public function ListerType() {
-        
+
     }
 
 //put your code here

@@ -7,14 +7,14 @@
  */
 interface IClient {
     /*
-     * @param int 
+     * @param int
      * @return Boolean
      */
-   public function Renouvellement($idContrat);
+   public function Renouvellement($idContrat,$newDate);
    /*
-    * @param int 
+    * @param int
     * @return Boolean
     */
    public function ResilierContrat($idContart);
-   
+
 }

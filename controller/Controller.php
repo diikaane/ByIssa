@@ -23,10 +23,9 @@ class Controller {
         ob_start();
         extract($variables);
         extract($variables1);
-        require dirname(__DIR__).'\view\\'.str_replace('.','\\',$view).'.php' ; 
+        require dirname(__DIR__).'\view\\'.str_replace('.','\\',$view).'.php' ;
         $content = ob_get_clean();
         require dirname(__DIR__).'/view/templates/'.$this->template.'.php';
-
 
     }
 }
