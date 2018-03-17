@@ -22,7 +22,6 @@
           ?>
 
       <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Login</div>
       <div class="card-body">
         <form action="" method="POST">
           <div class="form-group">

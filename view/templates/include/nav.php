@@ -34,6 +34,11 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
+          <a class="nav-link" href="#">
+            <?=$_SESSION['profile']?>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="deconnection">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
@@ -77,6 +82,11 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
+          <a class="nav-link" href="#">
+            <?=$_SESSION['profile']?>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="deconnection">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
@@ -119,6 +129,11 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <?=$_SESSION['profile']?>
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="deconnection">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -164,6 +179,11 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <?=$_SESSION['profile']?>
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="deconnection">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
